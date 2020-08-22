@@ -14,10 +14,15 @@ const forecast = (longitude, latitude, callback) => {
         } else if (body.message) {
             callback('Unable to find location', undefined);
         } else {
-            const forecast = 'It is ' + body.daily[0].weather[0].description + ' today, Current temperaure is ' +
-                body.current.temp + ' degree celsius and wind speed is ' + body.current.wind_speed + 'km/h';
+            const forecast = body.daily[0].weather[0].description + ' today, it is currently ' +
+                body.current.temp + ' degrees out. The high today is ' + body.daily[0].temp.max +
+                ' degrees with the low of ' + body.daily[0].temp.min + ' degrees. The wind speed is ' +
+                body.current.wind_speed + 'km/h';
 
-                callback(undefined, forecast);
+                const capitalizedForecast = forecast.charAt(0).toUpperCase() + forecast.slice(1);
+
+
+            callback(undefined, capitalizedForecast);
         }
 
     });
